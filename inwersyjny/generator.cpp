@@ -1,14 +1,23 @@
 #include <iostream>
 #include <stdio.h>
+
+#define TEST 1000000
 using namespace std;
 typedef unsigned long int uint;
 
-uint Xpoprzedni = 0;
-uint a = 123;
-uint c = 999;
-uint m = 1<<24;
+/**
+ * Globalne zmienne do podmianki
+ */
+uint Xpoprzedni = 0; // poprzednia wartość wygenerowana
+uint a = 123; 
+uint c = 999; 
+uint m = 1<<24; // zakres
 
-
+/**
+ * Rozszerzony algorytm euklidesa
+ *
+ * @see http://www.algorytm.org/algorytmy-arytmetyczne/rozszerzony-algorytm-euklidesa/euklides-rozsz-c.html
+ */
 uint odwroc(uint nwd_a, uint nwd_b) {
     uint r, nwd, a, q, b;
     uint x, x1, x2;
@@ -45,19 +54,25 @@ uint odwroc(uint nwd_a, uint nwd_b) {
     }
     return y;
 }
-// zaimplementowac dla nieskonczonosci
-// inf -> next c
-// 0 i inf nie wrzucac do odwroc
+
+/**
+ * Generowanie losowej liczby
+ */
 uint generator() {
-    Xpoprzedni = (a*odwroc(Xpoprzedni, m) + c) % m;
+    if (Xpoprzedni == m) {
+        Xpoprzedni = c;
+    } else if (Xpoprzedni == 0) {
+        Xpoprzedni = m;
+    } else {
+        Xpoprzedni = (a*odwroc(Xpoprzedni, m) + c) % m;
+    }
     return Xpoprzedni;
 }
-int main(int argc, char *argv[])
-{
-    int t=100;
+
+int main(int argc, char *argv[]) {
+    int t = TEST;
     while (t-->0) {
         printf("%d\n", generator());
     }
     return 0;
 }
-
