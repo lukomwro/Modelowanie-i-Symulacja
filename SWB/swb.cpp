@@ -15,10 +15,10 @@ int main()
     srand(time(NULL));
     for (int i = 0; i < R; i++)
         Xtab[i] = (uuint) rand() % m;
-	for(int i = 0; i < 1000; i++) {
+    for(int i = 0; i < 1000; i++) {
         printf("%u,", SWB(i%R));
-	}
-	printf("%u", SWB(0));
+    }
+    printf("%u", SWB(0));
     return 0;
 }
 
@@ -28,12 +28,12 @@ int main()
 */
 uuint SWB(uuint n)
 {   
-	if (Xtab[(R + n - S) % R] >= Xtab[n] + c) {
-		Xtab[n] = Xtab[(R + n - S) % R] - Xtab[n] - c;
-		c = 0;
-	}else {
-		Xtab[n] = m - ((Xtab[n] + c) - Xtab[(R + n - S) % R]);
-		c = 1;
-	}
-	return Xtab[n];
+    if (Xtab[(R + n - S) % R] >= Xtab[n] + c) {
+        Xtab[n] = Xtab[(R + n - S) % R] - Xtab[n] - c;
+        c = 0;
+    }else {
+        Xtab[n] = m - ((Xtab[n] + c) - Xtab[(R + n - S) % R]);
+        c = 1;
+    }
+    return Xtab[n];
 }
