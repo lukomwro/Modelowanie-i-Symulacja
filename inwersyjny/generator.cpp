@@ -1,7 +1,7 @@
 #include <iostream>
 #include <stdio.h>
 
-#define TEST 1000000
+#define TEST 10000
 using namespace std;
 typedef unsigned long int uint;
 
