@@ -10,6 +10,7 @@ import generators.JavaRandom;
 import generators.SWBGenerator;
 import tests.CHI2Test;
 import tests.ITest;
+import tests.KolmogorovTest;
 
 
 public class Generatory_testy 
@@ -21,8 +22,8 @@ public class Generatory_testy
         /*IGenerator generator = new InversiveGenerator();
         for (int i = 0; i < n; i++)
             System.out.println(generator.Next());*/
-        ITest t = new CHI2Test(10, new InversiveGenerator());
-        double result = t.Test(100000);
+        ITest t = new KolmogorovTest(new SWBGenerator());
+        double result = t.Test(100);
         System.out.println(result);
     }
 }
