@@ -4,6 +4,7 @@
  */
 package generators;
 
+import java.util.Date;
 import java.util.Random;
 
 
@@ -12,14 +13,14 @@ public class InversiveGenerator implements IGenerator
     private int prevX;
     private final int a = 5;
     private final int c = 1;
-    private int m = 17;
+    private int m = 113;
     
     public InversiveGenerator()
     {
         //przesuniecie jedynki moze spowodowac powstanie liczby ujemnej
-        // = (m < 0)? m*(-1) : m;
-        //prevX = Math.abs(new Random().nextInt())%m;
-        prevX = 0;
+        //m = (m < 0)? m*(-1) : m;
+        
+        prevX = Math.abs(new Random(new Date().getTime()).nextInt())%m;
     }
     
     
