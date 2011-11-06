@@ -19,11 +19,11 @@ public class Generatory_testy
     public static void main(String[] args) 
     {
         int n = 100;
-        /*IGenerator generator = new InversiveGenerator();
+        IGenerator generator = new InversiveGenerator();
         for (int i = 0; i < n; i++)
-            System.out.println(generator.Next());*/
-        ITest t = new KolmogorovTest(new SWBGenerator());
-        double result = t.Test(100);
-        System.out.println(result);
+            System.out.println(generator.Next());
+//        ITest t = new KolmogorovTest(new SWBGenerator());
+//        double result = t.Test(100);
+//        System.out.println(result);
     }
 }
