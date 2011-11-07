@@ -1,5 +1,22 @@
 Repo dla mis
 
+---  1 PROJEKT ---
 Chi Square Calculator
 www.stat.tamu.edu/~west/applets/chisqdemo.html
 http://www.ciphersbyritter.com/JAVASCRP/NORMCHIK.HTM
+
+To co w sprawku (do końca listopada):
+1. Kto napisał
+2. Wersja i ile punktow w kazdym oddaniu
+3. Przy każdej wersji info o zmianach (change log)
+4. Implementacja poza dokumentacja
+5. Rozważania teoretyczne
+    - długość cyklu
+    - co powinno sie dziac w generaotrze
+    - wszystko, tzn najwazniejsze rzeczy
+6. Testy
+    - zrobione dla różnych danych
+    - dla różnych zmiennych wewnetrznych generatorów ( zrobic lepszy, gorszy)
+    - dla zmiennych obliczyć długość cyklu (teoretyczną i praktyczną)
+    - testy probabilistyczne (chi^2, komogorov)
+    - test pokerowy, sum..
