@@ -20,3 +20,30 @@ To co w sprawku (do końca listopada):
     - dla zmiennych obliczyć długość cyklu (teoretyczną i praktyczną)
     - testy probabilistyczne (chi^2, komogorov)
     - test pokerowy, sum..
+	
+TEST PAR
+U[0,1]
+bierzemy 2 kolejne elementy i traktujemy jak współrzędne w układzie kartezjanskim
+
+TEST NAJWIĘKSZY Z t
+pobieramy t kolejnych elementów. Vj = max z t kolejnych elementów. 
+dystrubuanta = F(x) = x^t
+
+TEST SUM
+V = suma t kolejnych elementów z generatora. t jest małe
+np t = 2
+F(s) = s^2/2 dla 0 <= s <= 1, 1 - (2-s)^2/2 dla s >= 1
+
+TEST POKEROWY
+pobieramy 5 kolejnych elementów.
+konfiguracje:
+abcde, aabcd, aabbc, aaabc, aaabb, aaaab, aaaaa
+
+policzyc prawdopodobienstwo np P(aaaaa) = 1/d^4
+
+TEST KOLEKCJONERA
+dobieramy tak długo elementy aż coś się stanie - az wszystkie kategorie dostaniemy. liczymy ilosc losowań
+P(r)= brzydki wzorek
+
+TEST SERII MONOTONICZNYCH
+liczymy serie rosnaca i zapisujemy jej długość 
