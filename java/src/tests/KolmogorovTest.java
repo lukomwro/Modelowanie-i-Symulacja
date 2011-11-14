@@ -15,27 +15,41 @@ public class KolmogorovTest implements ITest
      * Więc dystrubuanta F(n) = 1/m
      */
     private IGenerator g;
+    private int period;
+    private int[] elements;
+
+    public int getPeriod()
+    {
+        return period;
+    }
+    
     public KolmogorovTest(IGenerator g)
     {
         this.g = g;
+        period = 0;
     }
     
-    @Override
     public double Test(int n)
     {
-        
+        elements = new int[n];
         double maxplus = 0.0;
         double maxminus = 0.0;
         double[] Xtab = new double[n];
+        int tmpGen;
         for (int i = 0; i < n; i++)
         {
-            Xtab[i] = (double)g.Next()/g.getRange();
+            tmpGen =  g.Next();
+            Xtab[i] = (double) tmpGen/g.getRange();
+            Period(tmpGen, i);
         }
+        if (period == 0)
+            period = -1;
         Arrays.sort(Xtab);
         for (int i = 1; i <= n; i++)
         {
             double tmp;
             tmp = ((double)i/ (double)n) - Xtab[i - 1];
+            
             if (tmp > maxplus || i == 1)
                 maxplus = tmp;
             
@@ -47,6 +61,20 @@ public class KolmogorovTest implements ITest
         double Knminus = Math.sqrt((double)n)* maxminus;
         double Kn = Math.max(Knminus, Knplus);
         return Kn;
+    }
+    
+    public void Period(int X, int cnt)
+    {
+        if (period != 0)
+            return;
+        for (int i = 0; i < cnt; i++)
+        {
+            if (X == elements[i])
+            {
+                this.period = cnt - i;
+            }
+        }
+        elements[cnt] = X;
     }
     
 }

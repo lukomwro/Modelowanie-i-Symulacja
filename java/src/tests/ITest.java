@@ -11,4 +11,5 @@ package tests;
 public interface ITest
 {
     public double Test(int n);
+    public int getPeriod();
 }
