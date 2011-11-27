@@ -1,4 +1,4 @@
-/*
+/*9
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
@@ -11,9 +11,12 @@ import java.util.Random;
 public class InversiveGenerator implements IGenerator
 {
     private int prevX;
-    private final int a = 1013;
-    private final int c = 2047;
-    private int m = 5717;
+//    private final int a = 255;
+//    private final int c = 1;
+//    private int m = 5717;
+    private final int a = 843;
+    private final int c = 11;
+    private int m = 78139;
     
     public InversiveGenerator()
     {

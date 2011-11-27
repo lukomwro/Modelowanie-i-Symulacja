@@ -19,12 +19,6 @@ public class CHI2Test implements ITest
     public int[] classSaturation;
     private double range;
     private int[] elements;
-    private int period;
-
-    public int getPeriod()
-    {
-        return period;
-    }
     
     public CHI2Test(int classesCount, IGenerator g)
     {
@@ -32,55 +26,88 @@ public class CHI2Test implements ITest
         classSaturation = new int[k];
         this.g = g;
         range = (double) g.getRange() / (double) k;
-        period = 0;
     }
     
     @Override
     public double Test(int n)
     {
-        elements = new int[n];
-        for (int i = 0; i < k; i++)
-            classSaturation[i] = 0;
-        for (int i = 0 ; i < n; i++)
-        {
-            int val = g.Next();
-            Period(val, i);
-            for (int j = 0; j < k; j++)
+        double[] results = new double[1000];
+        for(int a=0;a<1000;a++) {
+            elements = new int[n];
+            for (int i = 0; i < k; i++)
+                classSaturation[i] = 0;
+            for (int i = 0 ; i < n; i++)
             {
-                if (val >= (double) j*range && val < (double) (j+1)*range )
+                int val = g.Next();
+                for (int j = 0; j < k; j++)
                 {
-                    classSaturation[j]++;
+                    if (val >= (double) j*range && val < (double) (j+1)*range )
+                    {
+                        classSaturation[j]++;
+                    }
                 }
             }
-        }
-        if (period == 0)
-            period = -1;
-        double[] p = new double[k];
-        double V = 0;
-        double sum = 0;
-        for (int i = 0; i < k; i++)
-        {
-            p[i] = 1.0/(double)k;
-            double tmpval = (double)classSaturation[i] - (double)n * p[i];
-            tmpval *= tmpval;
-            tmpval /= (double) n * p[i];
-            V += tmpval;
-        }
-        return V;
-    }
 
-    public void Period(int X, int cnt)
-    {
-        if (period != 0)
-            return;
-        for (int i = 0; i < cnt; i++)
-        {
-            if (X == elements[i])
+            double[] p = new double[k];
+            double V = 0;
+            double sum = 0;
+            for (int i = 0; i < k; i++)
             {
-                this.period = cnt - i;
+                p[i] = 1.0/(double)k;
+                double tmpval = (double)classSaturation[i] - (double)n * p[i];
+                tmpval *= tmpval;
+                tmpval /= (double) n * p[i];
+                V += tmpval;
+            }
+            results[a] = V;
+        }
+        int suma = 0;
+        for(int i=0; i < 1000; i++) {
+            if(results[i] < 16.92) {
+                suma++; 
             }
         }
-        elements[cnt] = X;
+        return ((double)((double)suma/1000))*100;
     }
     
+    public double Test2(int n)
+    {
+        double[] results = new double[1000];
+        for(int a=0;a<1000;a++) {
+            elements = new int[n];
+            for (int i = 0; i < k; i++)
+                classSaturation[i] = 0;
+            for (int i = 0 ; i < n; i++)
+            {
+                int val = g.Next();
+                for (int j = 0; j < k; j++)
+                {
+                    if (val >= (double) j*range && val < (double) (j+1)*range )
+                    {
+                        classSaturation[j]++;
+                    }
+                }
+            }
+
+            double[] p = new double[k];
+            double V = 0;
+            double sum = 0;
+            for (int i = 0; i < k; i++)
+            {
+                p[i] = 1.0/(double)k;
+                double tmpval = (double)classSaturation[i] - (double)n * p[i];
+                tmpval *= tmpval;
+                tmpval /= (double) n * p[i];
+                V += tmpval;
+            }
+            results[a] = V;
+        }
+        int suma = 0;
+        for(int i=0; i < 1000; i++) {
+            if(results[i] < 16.92) {
+                suma++; 
+            }
+        }
+        return ((double)((double)suma/1000))*100;
+    }
 }

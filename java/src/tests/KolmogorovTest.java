@@ -15,66 +15,70 @@ public class KolmogorovTest implements ITest
      * Więc dystrubuanta F(n) = 1/m
      */
     private IGenerator g;
-    private int period;
     private int[] elements;
-
-    public int getPeriod()
-    {
-        return period;
-    }
     
     public KolmogorovTest(IGenerator g)
     {
         this.g = g;
-        period = 0;
     }
     
     public double Test(int n)
     {
-        elements = new int[n];
-        double maxplus = 0.0;
-        double maxminus = 0.0;
-        double[] Xtab = new double[n];
-        int tmpGen;
-        for (int i = 0; i < n; i++)
-        {
-            tmpGen =  g.Next();
-            Xtab[i] = (double) tmpGen/g.getRange();
-            Period(tmpGen, i);
-        }
-        if (period == 0)
-            period = -1;
-        Arrays.sort(Xtab);
-        for (int i = 1; i <= n; i++)
-        {
-            double tmp;
-            tmp = ((double)i/ (double)n) - Xtab[i - 1];
-            
-            if (tmp > maxplus || i == 1)
-                maxplus = tmp;
-            
-            tmp = Xtab[i - 1] - ((double) i - 1.0)/(double)n;
-            if (tmp > maxminus || i == 1)
-                maxminus = tmp;
-        }
-        double Knplus = Math.sqrt((double)n)* maxplus;
-        double Knminus = Math.sqrt((double)n)* maxminus;
-        double Kn = Math.max(Knminus, Knplus);
-        return Kn;
-    }
-    
-    public void Period(int X, int cnt)
-    {
-        if (period != 0)
-            return;
-        for (int i = 0; i < cnt; i++)
-        {
-            if (X == elements[i])
+        double[] results = new double[1000];
+        for(int a=0;a<1000;a++) {
+            elements = new int[n];
+            double maxplus = 0.0;
+            double maxminus = 0.0;
+            double[] Xtab = new double[n];
+            int tmpGen;
+            for (int i = 0; i < n; i++)
             {
-                this.period = cnt - i;
+                tmpGen =  g.Next();
+                Xtab[i] = (double) tmpGen/g.getRange();
+            }
+            Arrays.sort(Xtab);
+            for (int i = 1; i <= n; i++)
+            {
+                double tmp;
+                tmp = ((double)i/ (double)n) - Xtab[i - 1];
+
+                if (tmp > maxplus || i == 1)
+                    maxplus = tmp;
+
+                tmp = Xtab[i - 1] - ((double) i - 1.0)/(double)n;
+                if (tmp > maxminus || i == 1)
+                    maxminus = tmp;
+            }
+            double Knplus = Math.sqrt((double)n)* maxplus;
+            double Knminus = Math.sqrt((double)n)* maxminus;
+            double Kn = Math.max(Knminus, Knplus);
+            results[a] = Kn;
+        }
+        int suma = 0;
+        for(int i=0; i < 1000; i++) {
+            if(n==10) {
+                if(results[i] < 1.1655) {
+                    suma++; 
+                }
+            }else if(n==100) {
+                if(results[i] < 1.2091) {
+                    suma++; 
+                }
+            }else if(n==1000) {
+                if(results[i] < 1.2188) {
+                    suma++; 
+                }
+            }else if(n==10000) {
+                if(results[i] < 1.2222) {
+                    suma++; 
+                }
+            }else if(n==100000){
+                if(results[i] < 1.2233) {
+                    suma++; 
+                }
             }
         }
-        elements[cnt] = X;
+        return ((double)((double)suma/1000))*100;
     }
     
 }

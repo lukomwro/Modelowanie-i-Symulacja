@@ -14,7 +14,7 @@ public class SWBGenerator implements IGenerator
     private final int S = 10;
     private int[] Xtab;
     private int c = 0;
-    private int m = 80;//1 << 24;
+    private int m = 1 << 24;
     private int n = 0; //obecna pozycja
     
     public SWBGenerator()

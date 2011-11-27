@@ -4,8 +4,8 @@
  */
 package generatory_testy;
 
-import generators.IGenerator;
 import generators.InversiveGenerator;
+import generators.MixedGenerator;
 import generators.SWBGenerator;
 import tests.CHI2Test;
 import tests.ITest;
@@ -22,14 +22,13 @@ public class Generatory_testy
         //for (int i = 0; i < n; i++)
         //   System.out.println(generator.Next());
         //ITest t = new CHI2Test(10, new InversiveGenerator());
-        ITest t = new KolmogorovTest(new InversiveGenerator());
-        double result = t.Test(10000);
-        System.out.println("K-S Test: " + result);
-        System.out.println("Period: " + t.getPeriod());
-        
-        t = new CHI2Test(10, new InversiveGenerator());
-        result = t.Test(100);
+        //ITest t = new KolmogorovTest(new InversiveGenerator());
+        //double result = t.Test(10000);
+        //System.out.println("K-S Test: " + result);
+        double result;
+        ITest t = new KolmogorovTest(new SWBGenerator());
+        result = t.Test(200000);
         System.out.println("CHI2 Test: " + result);
-        System.out.println("Period: " + t.getPeriod());
+        
     }
 }
