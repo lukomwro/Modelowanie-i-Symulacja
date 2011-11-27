@@ -12,7 +12,7 @@ import java.math.BigInteger;
  */
 public class MixedGenerator implements IGenerator
 {
-    private int m = 1<<24;
+    private int m = 78139;// 1<<24;
     private IGenerator a;
     private IGenerator b;
     //private BigInteger sum;

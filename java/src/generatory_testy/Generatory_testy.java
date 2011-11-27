@@ -19,7 +19,6 @@ public class Generatory_testy
 
     public static void main(String[] args) 
     {
-        int n = 1000;
         //IGenerator generator = new InversiveGenerator();
         //for (int i = 0; i < n; i++)
         //   System.out.println(generator.Next());
@@ -30,10 +29,10 @@ public class Generatory_testy
         
         
         double result;
-        SumTest test = new SumTest(new SWBGenerator());
-        //MonotonicSeriesTest test = new MonotonicSeriesTest(new MixedGenerator(new SWBGenerator(), new InversiveGenerator()));
+        //SumTest test = new SumTest(new MixedGenerator(new InversiveGenerator(), new SWBGenerator()));
+        MonotonicSeriesTest test = new MonotonicSeriesTest(new InversiveGenerator());
         ITest t = new CHI2Test(test.getPi(), test);
-        result = t.Test(1000);
+        result = t.Test(10000);
         System.out.println("CHI2 Test: " + result);
         
     }

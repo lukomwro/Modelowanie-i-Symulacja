@@ -11,12 +11,12 @@ import java.util.Random;
 public class InversiveGenerator implements IGenerator
 {
     private int prevX;
-//    private final int a = 255;
-//    private final int c = 1;
-//    private int m = 5717;
-    private final int a = 843;
-    private final int c = 11;
-    private int m = 78139;
+    private final int a = 255;
+    private final int c = 1;
+    private int m = 5717;
+//    private final int a = 843;
+//    private final int c = 11;
+//   private int m = 78139;
     
     public InversiveGenerator()
     {
