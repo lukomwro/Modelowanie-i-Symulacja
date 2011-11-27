@@ -18,7 +18,6 @@ public class CHI2Test implements ITest
     public int k;
     public int[] classSaturation;
     private double range;
-    private int[] elements;
     private double[] pi;
     
     public CHI2Test(int classesCount, IGenerator g)
@@ -27,6 +26,7 @@ public class CHI2Test implements ITest
         classSaturation = new int[k];
         this.g = g;
         range = (double) g.getRange() / (double) k;
+        pi = new double[classesCount];
         for (int i = 0; i < classesCount; i++)
             pi[i] = 1.0/(double)k;
     }
@@ -65,7 +65,6 @@ public class CHI2Test implements ITest
     {
         double[] results = new double[1000];
         for(int a=0;a<1000;a++) {
-            elements = new int[n];
             for (int i = 0; i < k; i++)
                 classSaturation[i] = 0;
             for (int i = 0 ; i < n; i++)
@@ -76,19 +75,18 @@ public class CHI2Test implements ITest
                     if (val >= (double) j*range && val < (double) (j+1)*range )
                     {
                         classSaturation[j]++;
+                        break;
                     }
                 }
             }
 
-            double[] p = new double[k];
             double V = 0;
             double sum = 0;
             for (int i = 0; i < k; i++)
             {
-                p[i] = 1.0/(double)k;
-                double tmpval = (double)classSaturation[i] - (double)n * p[i];
+                double tmpval = (double)classSaturation[i] - (double)n * pi[i];
                 tmpval *= tmpval;
-                tmpval /= (double) n * p[i];
+                tmpval /= (double) n * pi[i];
                 V += tmpval;
             }
             results[a] = V;
@@ -101,45 +99,9 @@ public class CHI2Test implements ITest
         }
         return ((double)((double)suma/1000))*100;
     }
-    
-    public double Test2(int n)
-    {
-        double[] results = new double[1000];
-        for(int a=0;a<1000;a++) {
-            elements = new int[n];
-            for (int i = 0; i < k; i++)
-                classSaturation[i] = 0;
-            for (int i = 0 ; i < n; i++)
-            {
-                int val = g.Next();
-                for (int j = 0; j < k; j++)
-                {
-                    if (val >= (double) j*range && val < (double) (j+1)*range )
-                    {
-                        classSaturation[j]++;
-                    }
-                }
-            }
 
-            double[] p = new double[k];
-            double V = 0;
-            double sum = 0;
-            for (int i = 0; i < k; i++)
-            {
-                p[i] = 1.0/(double)k;
-                double tmpval = (double)classSaturation[i] - (double)n * p[i];
-                tmpval *= tmpval;
-                tmpval /= (double) n * p[i];
-                V += tmpval;
-            }
-            results[a] = V;
-        }
-        int suma = 0;
-        for(int i=0; i < 1000; i++) {
-            if(results[i] < 16.92) {
-                suma++; 
-            }
-        }
-        return ((double)((double)suma/1000))*100;
+    public double[] getPi()
+    {
+        return pi;
     }
 }

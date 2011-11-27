@@ -10,6 +10,8 @@ import generators.SWBGenerator;
 import tests.CHI2Test;
 import tests.ITest;
 import tests.KolmogorovTest;
+import tests.MonotonicSeriesTest;
+import tests.SumTest;
 
 
 public class Generatory_testy 
@@ -25,9 +27,13 @@ public class Generatory_testy
         //ITest t = new KolmogorovTest(new InversiveGenerator());
         //double result = t.Test(10000);
         //System.out.println("K-S Test: " + result);
+        
+        
         double result;
-        ITest t = new KolmogorovTest(new SWBGenerator());
-        result = t.Test(200000);
+        SumTest test = new SumTest(new SWBGenerator());
+        //MonotonicSeriesTest test = new MonotonicSeriesTest(new MixedGenerator(new SWBGenerator(), new InversiveGenerator()));
+        ITest t = new CHI2Test(test.getPi(), test);
+        result = t.Test(1000);
         System.out.println("CHI2 Test: " + result);
         
     }

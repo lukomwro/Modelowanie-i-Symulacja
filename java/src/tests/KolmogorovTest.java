@@ -22,6 +22,7 @@ public class KolmogorovTest implements ITest
         this.g = g;
     }
     
+    @Override
     public double Test(int n)
     {
         double[] results = new double[1000];
