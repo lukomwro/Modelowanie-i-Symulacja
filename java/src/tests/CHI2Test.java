@@ -19,6 +19,7 @@ public class CHI2Test implements ITest
     public int[] classSaturation;
     private double range;
     private int[] elements;
+    private double[] pi;
     
     public CHI2Test(int classesCount, IGenerator g)
     {
@@ -26,6 +27,37 @@ public class CHI2Test implements ITest
         classSaturation = new int[k];
         this.g = g;
         range = (double) g.getRange() / (double) k;
+        for (int i = 0; i < classesCount; i++)
+            pi[i] = 1.0/(double)k;
+    }
+    
+    /**
+     * To wymaga nieco wyjasnienia.
+     * Tak dlugo jak wykonujemy CHI2 dla generatora o rozkladzie rownomiernym,
+     * uzywamy pierwszego konstruktora i jest fajnie.
+     * W przypadku testu dwupoziomowego lub sum dystrybuanta sie zmienia
+     * i juz nie mamy takich samych prawdopodobienstw dla kazdego 'kubelka'.
+     * Radze te prawdopodobienstwa przeliczyc recznie i zakodowac na twardo wywolujac funkcje.
+     * Przyklad:
+     * Zalozmy, se mamy dystrybuante F(x).
+     * Zeby policzyc prawdopodobienstwo dla danego przedzialu [a,b] musimy policzyc Pr { a <= X <= b }
+     * Pr( X <= b ) liczymy bezposrednio z dystrybuanty jako F(b);
+     * Pr( X <= a) liczymy jako F(a).
+     * Ostatecznie  Pr{ a <= X <= b } = F(b) - F(a) .
+     * W ten sposób obliczylismy prawdopodobienstwo, ze wylosowany element wpadnie w przedzial (a,b]
+     * 
+     * @param classesCount - liczba klas [rowna dlugosci tablicy pi]
+     * @param pi - prawdopopodobienstwa
+     * @param g - generator
+     */
+    
+    public CHI2Test(double[] pi, IGenerator g)
+    {
+        k = pi.length;
+        classSaturation = new int[k];
+        this.g = g;
+        range = (double) g.getRange() / (double) k;
+        this.pi = pi;
     }
     
     @Override
